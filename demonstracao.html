@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laços de Repetição JavaScript - Demonstração Interativa</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        h2 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        .exemplo {
+            background-color: #f8f9fa;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        
+        .codigo {
+            background-color: #2d3748;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            margin: 10px 0;
+        }
+        
+        .resultado {
+            background-color: #e8f5e8;
+            border: 1px solid #4caf50;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+        }
+        
+        button:hover {
+            background-color: #2980b9;
+        }
+        
+        .output {
+            background-color: #1a1a1a;
+            color: #00ff00;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            margin: 10px 0;
+            min-height: 100px;
+            white-space: pre-wrap;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .visual-demo {
+            text-align: center;
+            padding: 20px;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background-color: #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background-color: #4caf50;
+            transition: width 0.3s ease;
+        }
+        
+        .animation-box {
+            width: 50px;
+            height: 50px;
+            background-color: #3498db;
+            margin: 10px auto;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔄 Laços de Repetição JavaScript - Demonstração Interativa</h1>
+        
+        <div class="grid">
+            <div class="card">
+                <h2>1. Laço FOR</h2>
+                <div class="exemplo">
+                    <p>Executa um código um número específico de vezes.</p>
+                    <div class="codigo">for (let i = 0; i < 5; i++) {<br>&nbsp;&nbsp;&nbsp;&nbsp;console.log("Iteração: " + i);<br>}</div>
+                    <button onclick="demonstrarFor()">Executar FOR</button>
+                    <div class="visual-demo">
+                        <div id="for-progress" class="progress-bar">
+                            <div class="progress-fill" style="width: 0%"></div>
+                        </div>
+                        <div id="for-counter">Clique para executar</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2>2. Laço WHILE</h2>
+                <div class="exemplo">
+                    <p>Executa enquanto uma condição for verdadeira.</p>
+                    <div class="codigo">let i = 0;<br>while (i < 5) {<br>&nbsp;&nbsp;&nbsp;&nbsp;console.log("Valor: " + i);<br>&nbsp;&nbsp;&nbsp;&nbsp;i++;<br>}</div>
+                    <button onclick="demonstrarWhile()">Executar WHILE</button>
+                    <div class="visual-demo">
+                        <div id="while-animation" class="animation-box"></div>
+                        <div id="while-counter">Clique para executar</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2>3. Laço DO...WHILE</h2>
+                <div class="exemplo">
+                    <p>Executa pelo menos uma vez, depois verifica a condição.</p>
+                    <div class="codigo">let i = 0;<br>do {<br>&nbsp;&nbsp;&nbsp;&nbsp;console.log("Execução: " + i);<br>&nbsp;&nbsp;&nbsp;&nbsp;i++;<br>} while (i < 3);</div>
+                    <button onclick="demonstrarDoWhile()">Executar DO...WHILE</button>
+                    <div class="visual-demo">
+                        <div id="dowhile-result">Clique para executar</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2>4. Laço FOR...OF</h2>
+                <div class="exemplo">
+                    <p>Itera sobre elementos de arrays ou strings.</p>
+                    <div class="codigo">const frutas = ["🍎", "🍌", "🍊"];<br>for (let fruta of frutas) {<br>&nbsp;&nbsp;&nbsp;&nbsp;console.log(fruta);<br>}</div>
+                    <button onclick="demonstrarForOf()">Executar FOR...OF</button>
+                    <div class="visual-demo">
+                        <div id="forof-display">Clique para executar</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2>5. Laço FOR...IN</h2>
+                <div class="exemplo">
+                    <p>Itera sobre propriedades de objetos.</p>
+                    <div class="codigo">const obj = {a: 1, b: 2, c: 3};<br>for (let prop in obj) {<br>&nbsp;&nbsp;&nbsp;&nbsp;console.log(prop + ": " + obj[prop]);<br>}</div>
+                    <button onclick="demonstrarForIn()">Executar FOR...IN</button>
+                    <div class="visual-demo">
+                        <div id="forin-result">Clique para executar</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2>6. Método FOREACH</h2>
+                <div class="exemplo">
+                    <p>Executa uma função para cada elemento do array.</p>
+                    <div class="codigo">const nums = [1, 2, 3, 4, 5];<br>nums.forEach((num, index) => {<br>&nbsp;&nbsp;&nbsp;&nbsp;console.log(`${index}: ${num}`);<br>});</div>
+                    <button onclick="demonstrarForEach()">Executar FOREACH</button>
+                    <div class="visual-demo">
+                        <div id="foreach-result">Clique para executar</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="container">
+            <h2>📊 Console de Saída</h2>
+            <button onclick="limparConsole()" style="background-color: #e74c3c;">Limpar Console</button>
+            <div id="console-output" class="output">Clique em qualquer botão para ver o resultado aqui...</div>
+        </div>
+        
+        <div class="container">
+            <h2>🎮 Demonstração Interativa: Jogo de Adivinhação</h2>
+            <div class="exemplo">
+                <p>Um exemplo prático usando laços para criar um jogo simples:</p>
+                <button onclick="jogoAdivinhacao()">Jogar Jogo de Adivinhação</button>
+                <div id="jogo-resultado" class="resultado" style="display: none;"></div>
+            </div>
+        </div>
+        
+        <div class="container">
+            <h2>🔢 Calculadora de Algoritmos</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Fatorial</h3>
+                    <input type="number" id="fatorial-input" placeholder="Digite um número" min="0" max="10">
+                    <button onclick="calcularFatorial()">Calcular</button>
+                    <div id="fatorial-resultado"></div>
+                </div>
+                
+                <div class="card">
+                    <h3>Fibonacci</h3>
+                    <input type="number" id="fibonacci-input" placeholder="Digite a posição" min="0" max="20">
+                    <button onclick="calcularFibonacci()">Calcular</button>
+                    <div id="fibonacci-resultado"></div>
+                </div>
+                
+                <div class="card">
+                    <h3>Números Primos</h3>
+                    <input type="number" id="primos-input" placeholder="Limite máximo" min="2" max="100">
+                    <button onclick="encontrarPrimos()">Encontrar</button>
+                    <div id="primos-resultado"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Função para adicionar saída ao console
+        function adicionarSaida(texto) {
+            const console = document.getElementById('console-output');
+            console.textContent += texto + '\n';
+            console.scrollTop = console.scrollHeight;
+        }
+        
+        // Função para limpar o console
+        function limparConsole() {
+            document.getElementById('console-output').textContent = 'Console limpo. Execute algum exemplo...\n';
+        }
+        
+        // Demonstração do laço FOR
+        function demonstrarFor() {
+            adicionarSaida('=== Demonstração FOR ===');
+            const progressBar = document.querySelector('#for-progress .progress-fill');
+            const counter = document.getElementById('for-counter');
+            
+            let i = 0;
+            const interval = setInterval(() => {
+                adicionarSaida(`Iteração: ${i}`);
+                progressBar.style.width = `${(i + 1) * 20}%`;
+                counter.textContent = `Iteração ${i + 1} de 5`;
+                
+                i++;
+                if (i >= 5) {
+                    clearInterval(interval);
+                    counter.textContent = 'Concluído!';
+                    setTimeout(() => {
+                        progressBar.style.width = '0%';
+                        counter.textContent = 'Clique para executar';
+                    }, 2000);
+                }
+            }, 500);
+        }
+        
+        // Demonstração do laço WHILE
+        function demonstrarWhile() {
+            adicionarSaida('=== Demonstração WHILE ===');
+            const animationBox = document.getElementById('while-animation');
+            const counter = document.getElementById('while-counter');
+            
+            let i = 0;
+            const colors = ['#e74c3c', '#f39c12', '#f1c40f', '#27ae60', '#3498db'];
+            
+            const interval = setInterval(() => {
+                adicionarSaida(`Valor: ${i}`);
+                animationBox.style.backgroundColor = colors[i];
+                animationBox.style.transform = `rotate(${i * 72}deg)`;
+                counter.textContent = `Iteração ${i + 1}`;
+                
+                i++;
+                if (i >= 5) {
+                    clearInterval(interval);
+                    counter.textContent = 'Concluído!';
+                    setTimeout(() => {
+                        animationBox.style.backgroundColor = '#3498db';
+                        animationBox.style.transform = 'rotate(0deg)';
+                        counter.textContent = 'Clique para executar';
+                    }, 2000);
+                }
+            }, 600);
+        }
+        
+        // Demonstração do laço DO...WHILE
+        function demonstrarDoWhile() {
+            adicionarSaida('=== Demonstração DO...WHILE ===');
+            const result = document.getElementById('dowhile-result');
+            
+            let i = 0;
+            let execucoes = [];
+            
+            do {
+                adicionarSaida(`Execução: ${i}`);
+                execucoes.push(`Execução ${i}`);
+                result.innerHTML = execucoes.join('<br>');
+                i++;
+            } while (i < 3);
+            
+            result.innerHTML += '<br><strong>✅ Executado pelo menos uma vez!</strong>';
+            
+            setTimeout(() => {
+                result.textContent = 'Clique para executar';
+            }, 3000);
+        }
+        
+        // Demonstração do laço FOR...OF
+        function demonstrarForOf() {
+            adicionarSaida('=== Demonstração FOR...OF ===');
+            const display = document.getElementById('forof-display');
+            
+            const frutas = ["🍎", "🍌", "🍊", "🍇", "🥝"];
+            let html = '';
+            let index = 0;
+            
+            const interval = setInterval(() => {
+                const fruta = frutas[index];
+                adicionarSaida(`Fruta: ${fruta}`);
+                html += `<span style="font-size: 2em; margin: 5px;">${fruta}</span>`;
+                display.innerHTML = html;
+                
+                index++;
+                if (index >= frutas.length) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        display.textContent = 'Clique para executar';
+                    }, 2000);
+                }
+            }, 700);
+        }
+        
+        // Demonstração do laço FOR...IN
+        function demonstrarForIn() {
+            adicionarSaida('=== Demonstração FOR...IN ===');
+            const result = document.getElementById('forin-result');
+            
+            const objeto = {nome: 'João', idade: 30, cidade: 'São Paulo', profissao: 'Dev'};
+            let html = '<div style="text-align: left;">';
+            let index = 0;
+            const props = Object.keys(objeto);
+            
+            const interval = setInterval(() => {
+                const prop = props[index];
+                const valor = objeto[prop];
+                adicionarSaida(`${prop}: ${valor}`);
+                html += `<div><strong>${prop}:</strong> ${valor}</div>`;
+                result.innerHTML = html + '</div>';
+                
+                index++;
+                if (index >= props.length) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        result.textContent = 'Clique para executar';
+                    }, 2000);
+                }
+            }, 800);
+        }
+        
+        // Demonstração do método FOREACH
+        function demonstrarForEach() {
+            adicionarSaida('=== Demonstração FOREACH ===');
+            const result = document.getElementById('foreach-result');
+            
+            const numeros = [1, 2, 3, 4, 5];
+            let html = '';
+            let index = 0;
+            
+            const interval = setInterval(() => {
+                const num = numeros[index];
+                adicionarSaida(`${index}: ${num}`);
+                html += `<div style="background: #3498db; color: white; padding: 5px; margin: 2px; border-radius: 3px; display: inline-block;">
+                    Índice ${index}: ${num}
+                </div>`;
+                result.innerHTML = html;
+                
+                index++;
+                if (index >= numeros.length) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        result.textContent = 'Clique para executar';
+                    }, 2000);
+                }
+            }, 600);
+        }
+        
+        // Jogo de Adivinhação
+        function jogoAdivinhacao() {
+            const resultadoDiv = document.getElementById('jogo-resultado');
+            resultadoDiv.style.display = 'block';
+            resultadoDiv.innerHTML = '<p>🎮 Iniciando jogo...</p>';
+            
+            adicionarSaida('=== Jogo de Adivinhação ===');
+            
+            const numeroSecreto = Math.floor(Math.random() * 10) + 1;
+            let tentativas = 0;
+            let acertou = false;
+            let html = '<p><strong>Adivinhe o número entre 1 e 10!</strong></p>';
+            
+            // Simulação de tentativas
+            while (!acertou && tentativas < 5) {
+                tentativas++;
+                const palpite = Math.floor(Math.random() * 10) + 1;
+                
+                adicionarSaida(`Tentativa ${tentativas}: ${palpite}`);
+                
+                if (palpite === numeroSecreto) {
+                    acertou = true;
+                    html += `<p>✅ Tentativa ${tentativas}: ${palpite} - <strong>ACERTOU!</strong></p>`;
+                    html += `<p>🎉 Parabéns! Você acertou em ${tentativas} tentativa(s)!</p>`;
+                } else {
+                    const dica = palpite < numeroSecreto ? 'muito baixo' : 'muito alto';
+                    html += `<p>❌ Tentativa ${tentativas}: ${palpite} - ${dica}</p>`;
+                    adicionarSaida(`Resultado: ${dica}`);
+                }
+            }
+            
+            if (!acertou) {
+                html += `<p>😔 Não foi dessa vez! O número era ${numeroSecreto}</p>`;
+                adicionarSaida(`Número secreto era: ${numeroSecreto}`);
+            }
+            
+            resultadoDiv.innerHTML = html;
+        }
+        
+        // Calculadora de Fatorial
+        function calcularFatorial() {
+            const input = document.getElementById('fatorial-input');
+            const resultado = document.getElementById('fatorial-resultado');
+            const n = parseInt(input.value);
+            
+            if (isNaN(n) || n < 0) {
+                resultado.innerHTML = '<p style="color: red;">Digite um número válido!</p>';
+                return;
+            }
+            
+            let fatorial = 1;
+            let passos = [`${n}! = `];
+            
+            for (let i = n; i >= 1; i--) {
+                fatorial *= i;
+                passos.push(i);
+            }
+            
+            resultado.innerHTML = `
+                <p><strong>${passos[0]}${passos.slice(1).join(' × ')} = ${fatorial}</strong></p>
+                <p>Calculado usando laço FOR</p>
+            `;
+            
+            adicionarSaida(`Fatorial de ${n} = ${fatorial}`);
+        }
+        
+        // Calculadora de Fibonacci
+        function calcularFibonacci() {
+            const input = document.getElementById('fibonacci-input');
+            const resultado = document.getElementById('fibonacci-resultado');
+            const n = parseInt(input.value);
+            
+            if (isNaN(n) || n < 0) {
+                resultado.innerHTML = '<p style="color: red;">Digite um número válido!</p>';
+                return;
+            }
+            
+            let fib = [0, 1];
+            
+            for (let i = 2; i <= n; i++) {
+                fib[i] = fib[i - 1] + fib[i - 2];
+            }
+            
+            const fibN = n <= 1 ? n : fib[n];
+            const sequencia = fib.slice(0, Math.min(n + 1, 10));
+            
+            resultado.innerHTML = `
+                <p><strong>Fibonacci(${n}) = ${fibN}</strong></p>
+                <p>Sequência: ${sequencia.join(', ')}${n > 9 ? '...' : ''}</p>
+                <p>Calculado usando laço FOR</p>
+            `;
+            
+            adicionarSaida(`Fibonacci(${n}) = ${fibN}`);
+        }
+        
+        // Encontrar Números Primos
+        function encontrarPrimos() {
+            const input = document.getElementById('primos-input');
+            const resultado = document.getElementById('primos-resultado');
+            const limite = parseInt(input.value);
+            
+            if (isNaN(limite) || limite < 2) {
+                resultado.innerHTML = '<p style="color: red;">Digite um número maior que 1!</p>';
+                return;
+            }
+            
+            const primos = [];
+            
+            for (let num = 2; num <= limite; num++) {
+                let ehPrimo = true;
+                
+                for (let i = 2; i <= Math.sqrt(num); i++) {
+                    if (num % i === 0) {
+                        ehPrimo = false;
+                        break;
+                    }
+                }
+                
+                if (ehPrimo) {
+                    primos.push(num);
+                }
+            }
+            
+            resultado.innerHTML = `
+                <p><strong>Números primos até ${limite}:</strong></p>
+                <p>${primos.join(', ')}</p>
+                <p>Total: ${primos.length} números primos</p>
+                <p>Calculado usando laços FOR aninhados</p>
+            `;
+            
+            adicionarSaida(`Primos até ${limite}: ${primos.length} encontrados`);
+        }
+    </script>
+</body>
+</html>
